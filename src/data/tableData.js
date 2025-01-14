@@ -40,13 +40,13 @@ const tableData = {
           type: "DEBIT",
         },
         {
-          id: "tx_123456793",
-          date: "2024-12-24T14:45:00Z",
-          to: "John Doe",
-          from: "Rental Income LLC",
-          amount: 1200.0,
+          id: "tx_123456794",
+          date: "2024-12-23T09:30:00Z",
+          to: "FoodMart",
+          from: "John Doe",
+          amount: 35.25,
           currency: "USD",
-          type: "CREDIT",
+          type: "DEBIT",
         },
       ],
       pagination: {
@@ -68,15 +68,6 @@ const tableData = {
     status: "success",
     data: {
       transactions: [
-        {
-          id: "tx_123456794",
-          date: "2024-12-23T09:30:00Z", // Continuing with 23rd Dec
-          to: "FoodMart",
-          from: "John Doe",
-          amount: 35.25,
-          currency: "USD",
-          type: "DEBIT",
-        },
         {
           id: "tx_123456795",
           date: "2024-12-23T12:45:00Z",

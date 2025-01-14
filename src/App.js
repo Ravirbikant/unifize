@@ -1,10 +1,10 @@
 import "./App.css";
-import TransactionsTable from "./components/transactionTable/TransactionsTable";
+import TransactionComponent from "./components/transactionsComponent/TransactionComponent";
 
 function App() {
   return (
     <div className="App">
-      <TransactionsTable />
+      <TransactionComponent />
     </div>
   );
 }

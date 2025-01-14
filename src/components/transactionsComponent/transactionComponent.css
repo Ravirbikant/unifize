@@ -1,0 +1,21 @@
+.table-container {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination-buttons button {
+  height: 40px;
+  cursor: pointer;
+}

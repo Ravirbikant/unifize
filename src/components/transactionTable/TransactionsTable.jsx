@@ -1,13 +1,22 @@
-import React from "react";
-import tableData from "../../data/tableData";
+import React, { useState } from "react";
+import "./transactionTable.css";
 
-const TransactionsTable = () => {
-  let pageTransactions = tableData?.[1]?.data?.transactions;
+const TransactionsTable = ({ transactions, lastDateFromPreviousPage }) => {
+  const [hoveredRow, setHoveredRow] = useState(null);
+  console.log(lastDateFromPreviousPage);
+
+  const parsedTransactions = transactions?.map((transaction, index) => {
+    return {
+      ...transaction,
+      showDate:
+        (index === 0 && transaction?.date !== lastDateFromPreviousPage) ||
+        (index > 0 && transaction?.date !== transactions[index - 1]?.date),
+    };
+  });
 
   return (
     <div>
-      <h2>Transactions</h2>
-      <table>
+      <table className="container">
         <thead>
           <tr>
             <th>Date</th>
@@ -20,9 +29,17 @@ const TransactionsTable = () => {
         </thead>
 
         <tbody>
-          {pageTransactions?.map((item) => (
-            <tr key={item?.id}>
-              <td>{item?.date}</td>
+          {parsedTransactions?.map((item) => (
+            <tr
+              key={item?.id}
+              onMouseEnter={() => {
+                setHoveredRow(item.id);
+              }}
+              onMouseLeave={() => {
+                setHoveredRow(null);
+              }}
+            >
+              <td>{(item.showDate || hoveredRow === item.id) && item?.date}</td>
               <td>{item?.to}</td>
               <td>{item?.amount}</td>
               <td>{item?.currency}</td>
