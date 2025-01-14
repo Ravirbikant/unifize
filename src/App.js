@@ -1,5 +1,5 @@
 import "./App.css";
-import TransactionsTable from "./components/TransactionsTable";
+import TransactionsTable from "./components/transactionTable/TransactionsTable";
 
 function App() {
   return (

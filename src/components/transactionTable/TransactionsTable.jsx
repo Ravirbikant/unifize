@@ -1,5 +1,5 @@
 import React from "react";
-import tableData from "../data/tableData";
+import tableData from "../../data/tableData";
 
 const TransactionsTable = () => {
   let pageTransactions = tableData?.[1]?.data?.transactions;
