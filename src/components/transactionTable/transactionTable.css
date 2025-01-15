@@ -33,7 +33,6 @@ tbody tr:hover {
   font-family: sans-serif;
   font-size: 14px;
   font-weight: 400;
-  padding-left: 15px;
   border: none;
 }
 
@@ -49,4 +48,26 @@ td div {
   display: flex;
   justify-content: center;
   background-color: #f6f6f6;
+  align-items: center;
+  font-weight: 600;
+}
+
+.attachment-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.amount-data {
+  width: fit-content;
+  gap: 0;
+}
+
+.decimal-values {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.credit {
+  color: green;
 }
