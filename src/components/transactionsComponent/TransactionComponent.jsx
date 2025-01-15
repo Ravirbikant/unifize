@@ -35,23 +35,22 @@ const TransactionComponent = () => {
   return (
     <div className="table-container">
       <div className="header">
-        <h2>Transactions</h2>
+        <span>Transactions</span>
         <div className="pagination-buttons">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
           >
-            Prev
+            <i class="bx bx-chevron-left"></i>
           </button>
           <button
-            disabled={currentPage === 2}
+            disabled={currentPage === 5}
             onClick={() => setCurrentPage((prev) => prev + 1)}
           >
-            Next
+            <i class="bx bx-chevron-right"></i>
           </button>
         </div>
       </div>
-      <p>Page number: {currentPage}</p>
       <TransactionsTable
         transactions={transactions}
         lastDateFromPreviousPage={lastSeenDateRef.current}

@@ -3,7 +3,6 @@ import "./transactionTable.css";
 
 const TransactionsTable = ({ transactions, lastDateFromPreviousPage }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
-  console.log(lastDateFromPreviousPage);
 
   const parsedTransactions = transactions?.map((transaction, index) => {
     return {
@@ -18,7 +17,7 @@ const TransactionsTable = ({ transactions, lastDateFromPreviousPage }) => {
     <div>
       <table className="container">
         <thead>
-          <tr>
+          <tr className="header-row">
             <th>Date</th>
             <th>To/From</th>
             <th>Amount</th>
@@ -39,12 +38,23 @@ const TransactionsTable = ({ transactions, lastDateFromPreviousPage }) => {
                 setHoveredRow(null);
               }}
             >
-              <td>{(item.showDate || hoveredRow === item.id) && item?.date}</td>
-              <td>{item?.to}</td>
+              <td className="date-cell">
+                {(item.showDate || hoveredRow === item.id) && item?.date}
+              </td>
+              <td>
+                <div>
+                  <div className="avatar" style={{ background: "#cfe5fd" }}>
+                    {item?.to.slice(0, 1).toUpperCase()}
+                  </div>
+                  {item?.to}
+                </div>
+              </td>
               <td>{item?.amount}</td>
               <td>{item?.currency}</td>
               <td>{item?.type}</td>
-              <td>+</td>
+              <td>
+                <div className="avatar"> +</div>
+              </td>
             </tr>
           ))}
         </tbody>
