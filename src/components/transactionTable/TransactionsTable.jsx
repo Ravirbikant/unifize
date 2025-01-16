@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import "./transactionTable.css";
 
-const TransactionsTable = ({ transactions, lastDateFromPreviousPage }) => {
+const TransactionsTable = ({ transactions }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
 
   return (
     <div>
-      <table className="container">
+      <table className="table-container">
         <thead>
           <tr className="header-row">
-            <th style={{ width: "100px" }}>Date</th>
-            <th style={{ width: "300px" }}>To/From</th>
-            <th style={{ width: "100px" }}>Amount</th>
-            <th style={{ width: "100px" }}>Currency</th>
-            <th style={{ width: "100px" }}>Type</th>
-            <th style={{ width: "100px", textAlign: "center" }}>Attachment</th>
+            <th style={{ width: "20%" }}>Date</th>
+            <th style={{ width: "30%" }}>To/From</th>
+            <th style={{ width: "15%" }}>Amount</th>
+            <th style={{ width: "15%" }}>Currency</th>
+            <th style={{ width: "12%" }}>Type</th>
+            <th
+              style={{
+                textAlign: "center",
+              }}
+            >
+              Attachment
+            </th>
           </tr>
         </thead>
 

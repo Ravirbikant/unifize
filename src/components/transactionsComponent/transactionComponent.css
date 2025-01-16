@@ -1,7 +1,8 @@
-.table-container {
+.main-container {
   width: 80%;
   margin: auto;
   margin-top: 50px;
+  max-width: 1200px;
 }
 
 .header {

@@ -7,8 +7,8 @@ import { formatDate } from "../../utils/util";
 const TransactionComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [transactions, setTransactions] = useState([]);
-  const lastSeenDateRef = useRef(null);
-  const [lastDate, setLastDate] = useState(null);
+
+  const visitedDatesRef = useRef(new Set());
 
   useEffect(() => {
     const pageTransactions = tableData?.[currentPage]?.data?.transactions || [];
@@ -17,30 +17,30 @@ const TransactionComponent = () => {
       date: formatDate(transaction.date),
     }));
 
-    console.log(lastDate);
     const transactionsWithShowDate = formattedTransactions.map(
       (transaction, index) => {
-        const showDate =
-          index === 0
-            ? transaction.date !== lastDate
-            : transaction.date !== formattedTransactions[index - 1]?.date;
+        let showDate;
 
-        return {
-          ...transaction,
-          showDate,
-        };
+        if (index === 0) {
+          showDate = !visitedDatesRef.current.has(transaction.date);
+        } else {
+          showDate =
+            transaction.date !== formattedTransactions[index - 1]?.date;
+        }
+
+        return { ...transaction, showDate };
       }
     );
 
-    setTransactions(transactionsWithShowDate);
-
-    setLastDate(
-      formattedTransactions[formattedTransactions.length - 1]?.date || null
+    visitedDatesRef.current.add(
+      transactionsWithShowDate[transactionsWithShowDate.length - 1].date
     );
+
+    setTransactions(transactionsWithShowDate);
   }, [currentPage]);
 
   return (
-    <div className="table-container">
+    <div className="main-container">
       <div className="header">
         <span>Transactions</span>
         <div className="pagination-buttons">
@@ -58,10 +58,7 @@ const TransactionComponent = () => {
           </button>
         </div>
       </div>
-      <TransactionsTable
-        transactions={transactions}
-        lastDateFromPreviousPage={lastSeenDateRef.current}
-      />
+      <TransactionsTable transactions={transactions} />
     </div>
   );
 };
