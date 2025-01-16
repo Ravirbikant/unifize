@@ -9,10 +9,12 @@ const TransactionsTable = ({ transactions }) => {
       <table className="table-container">
         <thead>
           <tr className="header-row">
-            <th style={{ width: "20%" }}>Date</th>
+            <th style={{ width: "12%" }}>
+              Date <span>(GMT+5.30)</span>
+            </th>
             <th style={{ width: "30%" }}>To/From</th>
-            <th style={{ width: "15%" }}>Amount</th>
-            <th style={{ width: "15%" }}>Currency</th>
+            <th style={{ width: "20%" }}>Amount</th>
+            <th style={{ width: "18%" }}>Currency</th>
             <th style={{ width: "12%" }}>Type</th>
             <th
               style={{
@@ -39,10 +41,14 @@ const TransactionsTable = ({ transactions }) => {
                 {(item.showDate || hoveredRow === item.id) && item?.date}
               </td>
               <td>
-                <div>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <div
                     className="avatar"
-                    style={{ background: "#cfe5fd", fontSize: "10px" }}
+                    style={{
+                      background: "#cfe5fd",
+                      fontSize: "10px",
+                      margin: "0",
+                    }}
                   >
                     {item?.to.slice(0, 1).toUpperCase()}
                   </div>
@@ -70,7 +76,7 @@ const TransactionsTable = ({ transactions }) => {
               <td>{item?.type}</td>
               <td>
                 <div className="attachment-row">
-                  <div className="avatar"> +</div>
+                  <div className="avatar">+</div>
                 </div>
               </td>
             </tr>
