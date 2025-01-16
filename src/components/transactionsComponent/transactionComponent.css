@@ -12,7 +12,6 @@
 }
 
 .header span {
-  font-family: sans-serif;
   font-size: 30px;
   font-weight: 380;
 }
@@ -44,4 +43,11 @@
   background-color: initial;
   color: #c7beb6;
   cursor: default;
+}
+
+.loading {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

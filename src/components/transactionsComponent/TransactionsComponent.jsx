@@ -4,14 +4,17 @@ import "./transactionComponent.css";
 import tableData from "../../data/tableData";
 import { formatDate } from "../../utils/util";
 
-const TransactionComponent = () => {
+const TransactionsComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [transactions, setTransactions] = useState([]);
+  const [numberOfPages, setNumberOfPages] = useState(0);
 
   const visitedDatesRef = useRef(new Set());
 
   useEffect(() => {
     const pageTransactions = tableData?.[currentPage]?.data?.transactions || [];
+    setNumberOfPages(tableData?.[currentPage]?.data?.pagination?.total_pages);
+
     const formattedTransactions = pageTransactions.map((transaction) => ({
       ...transaction,
       date: formatDate(transaction.date),
@@ -43,24 +46,32 @@ const TransactionComponent = () => {
     <div className="main-container">
       <div className="header">
         <span>Transactions</span>
-        <div className="pagination-buttons">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-          >
-            <i className="bx bx-chevron-left"></i>
-          </button>
-          <button
-            disabled={currentPage === 5}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-          >
-            <i className="bx bx-chevron-right"></i>
-          </button>
-        </div>
+        {transactions.length > 0 && (
+          <div className="pagination-buttons">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+            >
+              <i className="bx bx-chevron-left"></i>
+            </button>
+            <button
+              disabled={currentPage === numberOfPages}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+            >
+              <i className="bx bx-chevron-right"></i>
+            </button>
+          </div>
+        )}
       </div>
-      <TransactionsTable transactions={transactions} />
+      {transactions.length > 0 ? (
+        <TransactionsTable transactions={transactions} />
+      ) : (
+        <div className="loading">
+          <h2>Loading...</h2>
+        </div>
+      )}
     </div>
   );
 };
 
-export default TransactionComponent;
+export default TransactionsComponent;
