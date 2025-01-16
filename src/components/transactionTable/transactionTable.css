@@ -21,12 +21,12 @@ th span {
   font-size: 10px;
 }
 
-tr {
+tbody tr {
   cursor: pointer;
   height: 50px;
 }
 
-tr:hover {
+tbody tr:hover {
   background-color: #f7f7f9;
 }
 

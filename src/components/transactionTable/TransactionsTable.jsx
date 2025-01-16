@@ -14,14 +14,14 @@ const TransactionsTable = ({ transactions }) => {
       ),
       width: "12%",
     },
-    { content: "To/From", width: "20%" },
+    { content: "To", width: "30%" },
     {
       content: "Amount",
       width: "30%",
       textAlign: "right",
       padding: "10px 55px",
     },
-    { content: "Currency", width: "18%" },
+    { content: "Currency", width: "10%" },
     { content: "Type", width: "12%" },
     { content: "Attachment", width: "12%", textAlign: "center" },
   ];
@@ -31,16 +31,16 @@ const TransactionsTable = ({ transactions }) => {
       <table>
         <thead>
           <tr>
-            {headerColumns.map((column, index) => (
+            {headerColumns?.map((column, index) => (
               <th
                 key={index}
                 style={{
                   width: column?.width,
-                  textAlign: column.textAlign || "left",
+                  textAlign: column?.textAlign || "left",
                   padding: column?.padding,
                 }}
               >
-                {column.content}
+                {column?.content}
               </th>
             ))}
           </tr>
@@ -51,14 +51,14 @@ const TransactionsTable = ({ transactions }) => {
             <tr
               key={item?.id}
               onMouseEnter={() => {
-                setHoveredRow(item.id);
+                setHoveredRow(item?.id);
               }}
               onMouseLeave={() => {
                 setHoveredRow(null);
               }}
             >
               <td className="date-cell">
-                {(item.showDate || hoveredRow === item.id) && item?.date}
+                {(item?.showDate || hoveredRow === item?.id) && item?.date}
               </td>
               <td>
                 <div className="name-cell">

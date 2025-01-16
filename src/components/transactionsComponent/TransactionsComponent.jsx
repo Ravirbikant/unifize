@@ -15,12 +15,12 @@ const TransactionsComponent = () => {
     const pageTransactions = tableData?.[currentPage]?.data?.transactions || [];
     setNumberOfPages(tableData?.[currentPage]?.data?.pagination?.total_pages);
 
-    const formattedTransactions = pageTransactions.map((transaction) => ({
+    const formattedTransactions = pageTransactions?.map((transaction) => ({
       ...transaction,
       date: formatDate(transaction.date),
     }));
 
-    const transactionsWithShowDate = formattedTransactions.map(
+    const transactionsWithShowDate = formattedTransactions?.map(
       (transaction, index) => {
         let showDate;
 
@@ -28,7 +28,7 @@ const TransactionsComponent = () => {
           showDate = !visitedDatesRef.current.has(transaction.date);
         } else {
           showDate =
-            transaction.date !== formattedTransactions[index - 1]?.date;
+            transaction.date !== formattedTransactions?.[index - 1]?.date;
         }
 
         return { ...transaction, showDate };
@@ -36,7 +36,7 @@ const TransactionsComponent = () => {
     );
 
     visitedDatesRef.current.add(
-      transactionsWithShowDate[transactionsWithShowDate.length - 1].date
+      transactionsWithShowDate?.[transactionsWithShowDate.length - 1]?.date
     );
 
     setTransactions(transactionsWithShowDate);
