@@ -14,8 +14,13 @@ const TransactionsTable = ({ transactions }) => {
       ),
       width: "12%",
     },
-    { content: "To/From", width: "40%" },
-    { content: "Amount", width: "10%", textAlign: "right" },
+    { content: "To/From", width: "20%" },
+    {
+      content: "Amount",
+      width: "30%",
+      textAlign: "right",
+      padding: "10px 55px",
+    },
     { content: "Currency", width: "18%" },
     { content: "Type", width: "12%" },
     { content: "Attachment", width: "12%", textAlign: "center" },
@@ -23,15 +28,16 @@ const TransactionsTable = ({ transactions }) => {
 
   return (
     <div>
-      <table className="table-container">
+      <table>
         <thead>
-          <tr className="header-row">
+          <tr>
             {headerColumns.map((column, index) => (
               <th
                 key={index}
                 style={{
                   width: column?.width,
                   textAlign: column.textAlign || "left",
+                  padding: column?.padding,
                 }}
               >
                 {column.content}
@@ -61,6 +67,7 @@ const TransactionsTable = ({ transactions }) => {
                     style={{
                       background: "#cfe5fd",
                       fontSize: "10px",
+                      fontWeight: "600",
                     }}
                   >
                     {item?.to.slice(0, 1).toUpperCase()}
@@ -82,7 +89,7 @@ const TransactionsTable = ({ transactions }) => {
               <td>{item?.currency}</td>
               <td>{item?.type}</td>
               <td>
-                <div className="attachment-row">
+                <div className="attachment-data">
                   <div className="avatar">+</div>
                 </div>
               </td>
