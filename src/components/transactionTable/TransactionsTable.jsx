@@ -1,28 +1,42 @@
 import React, { useState } from "react";
 import "./transactionTable.css";
+import { formattedAmount } from "../../utils/util";
 
 const TransactionsTable = ({ transactions }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
+
+  const headerColumns = [
+    {
+      content: (
+        <>
+          Date <span>(GMT+5.30)</span>
+        </>
+      ),
+      width: "12%",
+    },
+    { content: "To/From", width: "40%" },
+    { content: "Amount", width: "10%", textAlign: "right" },
+    { content: "Currency", width: "18%" },
+    { content: "Type", width: "12%" },
+    { content: "Attachment", width: "12%", textAlign: "center" },
+  ];
 
   return (
     <div>
       <table className="table-container">
         <thead>
           <tr className="header-row">
-            <th style={{ width: "12%" }}>
-              Date <span>(GMT+5.30)</span>
-            </th>
-            <th style={{ width: "30%" }}>To/From</th>
-            <th style={{ width: "20%" }}>Amount</th>
-            <th style={{ width: "18%" }}>Currency</th>
-            <th style={{ width: "12%" }}>Type</th>
-            <th
-              style={{
-                textAlign: "center",
-              }}
-            >
-              Attachment
-            </th>
+            {headerColumns.map((column, index) => (
+              <th
+                key={index}
+                style={{
+                  width: column?.width,
+                  textAlign: column.textAlign || "left",
+                }}
+              >
+                {column.content}
+              </th>
+            ))}
           </tr>
         </thead>
 
@@ -41,13 +55,12 @@ const TransactionsTable = ({ transactions }) => {
                 {(item.showDate || hoveredRow === item.id) && item?.date}
               </td>
               <td>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div className="name-cell">
                   <div
                     className="avatar"
                     style={{
                       background: "#cfe5fd",
                       fontSize: "10px",
-                      margin: "0",
                     }}
                   >
                     {item?.to.slice(0, 1).toUpperCase()}
@@ -62,13 +75,7 @@ const TransactionsTable = ({ transactions }) => {
                       item?.type === "CREDIT" && "credit"
                     }`}
                   >
-                    {item.currency === "USD" ? "$" : "€"}{" "}
-                    {item.amount.toString().split(".")[0]}
-                    {item.amount.toString().includes(".") && (
-                      <span className="decimal-values">
-                        .{item.amount.toString().split(".")[1]}
-                      </span>
-                    )}
+                    {formattedAmount(item.amount, item.currency)}
                   </div>
                 )}
               </td>

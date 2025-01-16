@@ -10,6 +10,7 @@ tr {
 .header-row th,
 td {
   border-bottom: 2px solid #f7f7f9;
+  padding-bottom: 5px;
 }
 
 tr th {
@@ -19,6 +20,7 @@ tr th {
   font-weight: 400;
   text-align: left;
   vertical-align: bottom;
+  padding: 0 7px;
 }
 
 tbody tr {
@@ -43,11 +45,18 @@ th span {
 
 td {
   height: 48px;
+  padding: 0 7px;
+  font-size: 15px;
 }
 
 td div {
   display: flex;
   gap: 10px;
+}
+
+.name-cell {
+  display: flex;
+  align-items: center;
 }
 
 .avatar {
@@ -69,8 +78,9 @@ td div {
 }
 
 .amount-data {
-  width: fit-content;
   gap: 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .decimal-values {
