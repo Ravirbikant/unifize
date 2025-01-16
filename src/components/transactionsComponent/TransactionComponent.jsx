@@ -8,28 +8,35 @@ const TransactionComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [transactions, setTransactions] = useState([]);
   const lastSeenDateRef = useRef(null);
+  const [lastDate, setLastDate] = useState(null);
 
   useEffect(() => {
-    let pageTransactions = tableData?.[currentPage]?.data?.transactions;
-    pageTransactions = pageTransactions.map((transaction) => {
-      return {
-        ...transaction,
-        date: formatDate(transaction.date),
-      };
-    });
+    const pageTransactions = tableData?.[currentPage]?.data?.transactions || [];
+    const formattedTransactions = pageTransactions.map((transaction) => ({
+      ...transaction,
+      date: formatDate(transaction.date),
+    }));
 
-    const lastTransactionDate =
-      pageTransactions?.[pageTransactions.length - 1]?.date;
+    console.log(lastDate);
+    const transactionsWithShowDate = formattedTransactions.map(
+      (transaction, index) => {
+        const showDate =
+          index === 0
+            ? transaction.date !== lastDate
+            : transaction.date !== formattedTransactions[index - 1]?.date;
 
-    if (
-      lastTransactionDate &&
-      (!lastSeenDateRef.current ||
-        lastTransactionDate > lastSeenDateRef.current)
-    ) {
-      console.log("Updating last date");
-      lastSeenDateRef.current = lastTransactionDate;
-    }
-    setTransactions(pageTransactions);
+        return {
+          ...transaction,
+          showDate,
+        };
+      }
+    );
+
+    setTransactions(transactionsWithShowDate);
+
+    setLastDate(
+      formattedTransactions[formattedTransactions.length - 1]?.date || null
+    );
   }, [currentPage]);
 
   return (
@@ -41,13 +48,13 @@ const TransactionComponent = () => {
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
           >
-            <i class="bx bx-chevron-left"></i>
+            <i className="bx bx-chevron-left"></i>
           </button>
           <button
             disabled={currentPage === 5}
             onClick={() => setCurrentPage((prev) => prev + 1)}
           >
-            <i class="bx bx-chevron-right"></i>
+            <i className="bx bx-chevron-right"></i>
           </button>
         </div>
       </div>

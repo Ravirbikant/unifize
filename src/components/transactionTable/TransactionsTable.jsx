@@ -4,15 +4,6 @@ import "./transactionTable.css";
 const TransactionsTable = ({ transactions, lastDateFromPreviousPage }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
 
-  const parsedTransactions = transactions?.map((transaction, index) => {
-    return {
-      ...transaction,
-      showDate:
-        (index === 0 && transaction?.date !== lastDateFromPreviousPage) ||
-        (index > 0 && transaction?.date !== transactions[index - 1]?.date),
-    };
-  });
-
   return (
     <div>
       <table className="container">
@@ -28,7 +19,7 @@ const TransactionsTable = ({ transactions, lastDateFromPreviousPage }) => {
         </thead>
 
         <tbody>
-          {parsedTransactions?.map((item) => (
+          {transactions?.map((item) => (
             <tr
               key={item?.id}
               onMouseEnter={() => {
